@@ -198,7 +198,7 @@
   margin-top: 32px;
 }
 
-.load-more {
+.load-more  {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,11 +219,11 @@
   color: #fff;
 }
 
-.load-more-hidden {
+button.load-more.hidden {
   display: none;
 }
 
-.load-more:hover {
+.load-more :hover {
   background: #6c8cff;
   cursor: pointer;
 }

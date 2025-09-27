@@ -6,8 +6,11 @@ import {
   clearGallery,
   showLoader,
   hideLoader,
-  checkHits,
   loadMoreBtn,
+  showLoadBtn,
+  hideLoadBtn,
+  disabledLoadBtn,
+  enabledLoadBtn,
 } from './js/render-functions.js';
 
 const form = document.querySelector('.form');
@@ -39,7 +42,7 @@ async function hendlerSubmit(event) {
 
     hitsCounter += hits.length;
 
-    checkHits(hitsCounter, totalHits);
+    checkHits(totalHits);
   } catch (error) {
     showQueryError(error.message);
   } finally {
@@ -49,7 +52,7 @@ async function hendlerSubmit(event) {
 
 async function loadMore(event) {
   page += 1;
-  loadMoreBtn.disabled = true;
+  disabledLoadBtn();
   showLoader();
 
   try {
@@ -58,12 +61,12 @@ async function loadMore(event) {
 
     hitsCounter += hits.length;
 
-    checkHits(hitsCounter, totalHits);
+    checkHits(totalHits);
   } catch (error) {
     showQueryError(error.message);
   } finally {
     hideLoader();
-    loadMoreBtn.disabled = false;
+    enabledLoadBtn();
   }
 }
 
@@ -96,4 +99,13 @@ function showWarning(message) {
 function clearForm() {
   page = 1;
   hitsCounter = 0;
+}
+function checkHits(totalHits) {
+  if (hitsCounter >= totalHits) {
+    hideLoadBtn();
+
+    showWarning("We're sorry, but you've reached the end of search results.");
+  } else {
+    showLoadBtn();
+  }
 }
