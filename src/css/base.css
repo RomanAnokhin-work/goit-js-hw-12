@@ -17,6 +17,7 @@
 }
 
 body {
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   flex-direction: column;
   min-width: 100vw;
@@ -26,7 +27,10 @@ body {
 
 main {
   flex-grow: 1;
+  max-width: 1128px;
+  margin: auto;
 }
+
 main:has(.back-link) {
   text-align: center;
 }

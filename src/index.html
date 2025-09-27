@@ -4,19 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
+    <title>goit-js-hw-12</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
+
   <body>
-    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
-
     <main>
-      <!-- Loads the specified .html file -->
-      <load src="./partials/vite-promo.html" />
-      <load src="./partials/badges.html" />
-    </main>
+      <form class="form">
+        <div class="form-group">
+          <label>
+            <input type="text" name="search" placeholder="Search images..." />
+          </label>
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      <ul class="gallery"></ul>
+      <div class="button-group">
+        <button class="js-load-more load-more-hidden">Load more</button>
+      </div>
 
-    <load src="./partials/footer.html" />
+      <span class="loader hidden">L &nbsp; ading</span>
+    </main>
 
     <script type="module" src="./main.js"></script>
   </body>
