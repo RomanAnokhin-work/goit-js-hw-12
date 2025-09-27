@@ -6,10 +6,11 @@ import {
   clearGallery,
   showLoader,
   hideLoader,
+  checkHits,
+  loadMoreBtn,
 } from './js/render-functions.js';
 
 const form = document.querySelector('.form');
-const loadMoreBtn = document.querySelector('.js-load-more');
 
 let page = 1;
 let inputValue = '';
@@ -30,6 +31,7 @@ async function hendlerSubmit(event) {
 
   showLoader();
   clearGallery();
+  clearForm();
 
   try {
     const { hits, totalHits } = await getImagesByQuery(inputValue, page);
@@ -37,7 +39,7 @@ async function hendlerSubmit(event) {
 
     hitsCounter += hits.length;
 
-    checkHits(totalHits);
+    checkHits(hitsCounter, totalHits);
   } catch (error) {
     showQueryError(error.message);
   } finally {
@@ -47,7 +49,7 @@ async function hendlerSubmit(event) {
 
 async function loadMore(event) {
   page += 1;
-  loadMore.disabled = true;
+  loadMoreBtn.disabled = true;
   showLoader();
 
   try {
@@ -56,22 +58,12 @@ async function loadMore(event) {
 
     hitsCounter += hits.length;
 
-    checkHits(totalHits);
+    checkHits(hitsCounter, totalHits);
   } catch (error) {
     showQueryError(error.message);
   } finally {
     hideLoader();
-    loadMore.disabled = false;
-  }
-}
-
-function checkHits(totalHits) {
-  if (hitsCounter >= totalHits) {
-    loadMoreBtn.classList.replace('load-more', 'load-more-hidden');
-
-    showWarning("We're sorry, but you've reached the end of search results.");
-  } else {
-    loadMoreBtn.classList.replace('load-more-hidden', 'load-more');
+    loadMoreBtn.disabled = false;
   }
 }
 
@@ -100,4 +92,8 @@ function showWarning(message) {
     timeout: 3000,
     close: true,
   });
+}
+function clearForm() {
+  page = 1;
+  hitsCounter = 0;
 }
