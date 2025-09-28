@@ -105,7 +105,7 @@ function checkHits(totalHits) {
     hideLoadBtn();
 
     showWarning("We're sorry, but you've reached the end of search results.");
-  } else {
+  } else if (hitsCounter < totalHits) {
     showLoadBtn();
   }
 }
