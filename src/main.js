@@ -101,11 +101,11 @@ function clearForm() {
   hitsCounter = 0;
 }
 function checkHits(totalHits) {
-  if (hitsCounter >= totalHits) {
+  if (hitsCounter < totalHits) {
+    showLoadBtn();
+  } else if (hitsCounter >= totalHits) {
     hideLoadBtn();
 
     showWarning("We're sorry, but you've reached the end of search results.");
-  } else if (hitsCounter < totalHits) {
-    showLoadBtn();
   }
 }
