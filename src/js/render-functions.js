@@ -9,7 +9,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
-export function createGallery(images, page = 1) {
+export function createGallery(images) {
   const markup = images
     .map(
       ({
@@ -51,25 +51,17 @@ export function createGallery(images, page = 1) {
     )
     .join('');
 
-  if (page > 1) {
-    gallery.insertAdjacentHTML('beforeend', markup);
-    lightbox.refresh();
-
-    const firstCard = document.querySelector('.gallery-item');
-    if (firstCard) {
-      const cardHeight = firstCard.getBoundingClientRect().height;
-      window.scrollBy({
-        top: cardHeight * 2,
-        behavior: 'smooth',
-      });
-    }
-
-    return;
-  }
-
-  gallery.innerHTML = markup;
-
+  gallery.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
+
+  const firstCard = document.querySelector('.gallery-item');
+  if (firstCard) {
+    const cardHeight = firstCard.getBoundingClientRect().height;
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+  }
 }
 export function clearGallery() {
   gallery.innerHTML = '';

@@ -57,7 +57,7 @@ async function loadMore(event) {
 
   try {
     const { hits, totalHits } = await getImagesByQuery(inputValue, page);
-    createGallery(hits, page);
+    createGallery(hits);
 
     hitsCounter += hits.length;
 
